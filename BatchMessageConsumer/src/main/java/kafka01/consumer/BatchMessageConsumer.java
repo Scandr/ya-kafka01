@@ -1,5 +1,6 @@
 package kafka01.consumer;
 
+// Import libs
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -10,10 +11,10 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// Custom consumer class
 public class BatchMessageConsumer {
     private static KafkaConsumer<String, KafkaMessage> createKafkaConsumer() {
+        // Get settings from env vars
         String bootstrapServersConfig = System.getenv("BOOTSTRAP_SERVERS_CONFIG");
         String consumerGroupName = System.getenv("CONSUMER_GROUP_NAME");
         int maxPollRecordsConfig = Integer.parseInt(System.getenv("MAX_POLL_RECORDS_CONFIG"));
@@ -36,8 +37,9 @@ public class BatchMessageConsumer {
         return new KafkaConsumer<>(props);
     }
     public static void main(String[] args) {
+        // Get settings from env vars
         String topicName = System.getenv("KAFKA_TOPIC_NAME");
-
+        // Create consumer
         KafkaConsumer<String, KafkaMessage> consumer = createKafkaConsumer();
 
         // Подписка на топик

@@ -1,5 +1,6 @@
 package kafka01.consumer;
 
+// Import libs
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -12,6 +13,7 @@ import java.util.Properties;
 
 public class SingleMessageConsumer {
     private static KafkaConsumer<String, KafkaMessage> createKafkaConsumer() {
+        // Get settings from env vars
         String bootstrapServersConfig = System.getenv("BOOTSTRAP_SERVERS_CONFIG");
         Properties props = new Properties();
         /// Настройка консьюмера
@@ -28,8 +30,10 @@ public class SingleMessageConsumer {
     }
 
     public static void main(String[] args) {
+        // Get settings from env vars
         String topicName = System.getenv("KAFKA_TOPIC_NAME");
 
+        // Create consumer
         KafkaConsumer<String, KafkaMessage> consumer = createKafkaConsumer();
 
         // Подписка на топик

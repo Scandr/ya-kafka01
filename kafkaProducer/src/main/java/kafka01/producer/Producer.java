@@ -1,5 +1,6 @@
 package kafka01.producer;
 
+// Import libs
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -10,6 +11,7 @@ import java.util.Properties;
 public class Producer {
 
     private static KafkaProducer<String, KafkaMessage> createKafkaProducer() {
+        // Get settings from env var
         String bootstrapServersConfig = System.getenv("BOOTSTRAP_SERVERS_CONFIG");
         Properties props = new Properties();
         // Конфигурация продюсера – адрес сервера, сериализаторы для ключа и значения.
@@ -23,16 +25,19 @@ public class Producer {
     }
 
     public static void main(String[] args) {
-
+        // Get settings from env var
         String topicName = System.getenv("KAFKA_TOPIC_NAME");
         int msgPeriod = Integer.parseInt(System.getenv("MESSAGE_PERIOD"));
 
+        // Create producer
         KafkaProducer<String, KafkaMessage> producer = createKafkaProducer();
 
         try {
+            // Send simple messages every ${MESSAGE_PERIOD}
             int messageID = 0;
             while (true) {
                 try {
+                    // Generate simple message key and content
                     String messageKey = String.format("key-%2d", messageID);
                     String messageText = String.format("message-%2d", messageID);
 
