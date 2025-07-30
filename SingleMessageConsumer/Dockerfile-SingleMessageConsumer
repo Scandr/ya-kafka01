@@ -1,0 +1,8 @@
+FROM maven:3.9.10-sapmachine-21
+
+COPY target/SingleMessageConsumer-1.0-jar-with-dependencies.jar /kafka-apps/SingleMessageConsumer.jar
+
+WORKDIR /kafka-apps
+
+ENTRYPOINT ["java", "-jar"]
+CMD ["SingleMessageConsumer.jar"]
